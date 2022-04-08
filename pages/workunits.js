@@ -1,4 +1,4 @@
-export default function Articles({articles}) {
+export default function Workunits({workunits}) {
 
     return <>
         <main>
@@ -8,18 +8,16 @@ export default function Articles({articles}) {
                     <th>#</th>
                     <th>code</th>
                     <th>libelle</th>
-                    <th>id_categorie</th>
                 </tr>
                 </thead>
                 <tbody>
                 {
-                    articles.map((r) => (
+                    workunits.map((r) => (
                         // eslint-disable-next-line react/jsx-key
                         <tr>
                             <th>{r.id}</th>
                             <th>{r.code}</th>
                             <th>{r.libelle}</th>
-                            <th>{r.id_categorie}</th>
                         </tr>
                     ))
                 }
@@ -30,10 +28,10 @@ export default function Articles({articles}) {
 }
 
 export async function getStaticProps({params}) {
-    const articles = await fetch('http://88.168.248.140:8000/articles').then(r => r.json())
+    const workunits = await fetch('http://88.168.248.140:8000/workunits').then(r => r.json())
     return {
         props: {
-            articles
+            workunits
         }
     }
 }
