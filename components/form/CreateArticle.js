@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Button} from "react-bootstrap";
+import * as constant from "../../utils/constants";
 
 export default function CreateArticle() {
     const [query, setQuery] = useState({
@@ -28,7 +29,7 @@ export default function CreateArticle() {
         Object.entries(query).forEach(([key, value]) => {
             formData.append(key, value);
         })
-        fetch("https://getform.io/f/df311cb5-f041-402b-8b36-1723600dc29a", {
+        fetch(constant.URL_FORMIO, {
             method: "POST",
             body: formData
         }).then(() => setQuery({

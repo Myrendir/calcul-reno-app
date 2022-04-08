@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import * as constant from '../utils/constants';
 
 export default function Agencies({agencies}) {
@@ -13,6 +13,7 @@ export default function Agencies({agencies}) {
                 </tr>
                 </thead>
                 <tbody>
+
                 {
                     agencies.map((r) => (
                         // eslint-disable-next-line react/jsx-key
