@@ -1,3 +1,5 @@
+import * as constant from "../utils/constants";
+
 export default function Workunits({workunits}) {
 
     return <>
@@ -28,7 +30,7 @@ export default function Workunits({workunits}) {
 }
 
 export async function getStaticProps({params}) {
-    const workunits = await fetch('http://88.168.248.140:8000/workunits').then(r => r.json())
+    const workunits = await fetch(constant.URL_JAD_API + 'workunits').then(r => r.json())
     return {
         props: {
             workunits

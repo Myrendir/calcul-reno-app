@@ -1,3 +1,5 @@
+import * as constant from "../utils/constants";
+
 export default function Categories({categories}) {
 
     return <>
@@ -28,7 +30,7 @@ export default function Categories({categories}) {
 }
 
 export async function getStaticProps({params}) {
-    const categories = await fetch('http://88.168.248.140:8000/categories').then(r => r.json())
+    const categories = await fetch(constant.URL_JAD_API + 'categories').then(r => r.json())
     return {
         props: {
             categories

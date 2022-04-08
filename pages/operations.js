@@ -1,3 +1,5 @@
+import * as constant from "../utils/constants";
+
 export default function Operations({operations}) {
 
     return <>
@@ -32,7 +34,7 @@ export default function Operations({operations}) {
 }
 
 export async function getStaticProps({params}) {
-    const operations = await fetch('http://88.168.248.140:8000/operations').then(r => r.json())
+    const operations = await fetch(constant.URL_JAD_API + 'operations').then(r => r.json())
     return {
         props: {
             operations

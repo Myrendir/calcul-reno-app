@@ -1,5 +1,7 @@
-export default function Agencies({agencies}) {
+import React, {useState} from "react";
+import * as constant from '../utils/constants';
 
+export default function Agencies({agencies}) {
     return <>
         <main>
             <table className={"table container"}>
@@ -28,7 +30,7 @@ export default function Agencies({agencies}) {
 }
 
 export async function getStaticProps({params}) {
-    const agencies = await fetch('http://88.168.248.140:8000/agencies').then(r => r.json())
+    const agencies = await fetch(constant.URL_JAD_API + 'agencies').then(r => r.json())
     return {
         props: {
             agencies

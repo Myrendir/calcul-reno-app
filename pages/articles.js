@@ -1,7 +1,11 @@
-export default function Articles({articles}) {
+import CreateArticle from "../components/form/CreateArticle";
+import React from "react";
+import * as constant from "../utils/constants";
 
+export default function Articles({articles}) {
     return <>
         <main>
+            <CreateArticle/>
             <table className={"table container"}>
                 <thead className={"thead-dark"}>
                 <tr>
@@ -30,7 +34,7 @@ export default function Articles({articles}) {
 }
 
 export async function getStaticProps({params}) {
-    const articles = await fetch('http://88.168.248.140:8000/articles').then(r => r.json())
+    const articles = await fetch(constant.URL_JAD_API + 'articles').then(r => r.json())
     return {
         props: {
             articles

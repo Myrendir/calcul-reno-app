@@ -1,3 +1,5 @@
+import * as constant from "../utils/constants";
+
 export default function Recipes({recipes}) {
     return <>
         <main>
@@ -33,7 +35,7 @@ export default function Recipes({recipes}) {
 }
 
 export async function getStaticProps({params}) {
-    const recipes = await fetch('http://88.168.248.140:8000/recipes').then(r => r.json())
+    const recipes = await fetch(constant.URL_JAD_API + 'recipes').then(r => r.json())
     return {
         props: {
             recipes

@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Button} from "react-bootstrap";
 
 export default function CreateArticle() {
     const [query, setQuery] = useState({
@@ -6,6 +7,11 @@ export default function CreateArticle() {
         codeCategory: "",
         libelle: "",
     })
+    const [showResults, setShowResults] = useState(false);
+
+    const open = () => setShowResults(true);
+
+    const close = () => setShowResults(false);
 
     const handleParam = () => (e) => {
         const name = e.target.name;
@@ -15,6 +21,7 @@ export default function CreateArticle() {
             [name]: value
         }));
     };
+
     const formSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -28,44 +35,55 @@ export default function CreateArticle() {
             codeArticle: "", codeCategory: "", libelle: ""
         }))
     }
+
     return (
         <>
-            <form onSubmit={formSubmit} className={"container col-sm-2"}>
-                <div>
-                    <input
-                        type="text"
-                        name="codeArticle"
-                        required
-                        placeholder="codeArticle"
-                        className="form-control"
-                        value={query.codeArticle}
-                        onChange={handleParam()}
-                    />
-                </div>
-                <div>
-                    <input
-                        type="text"
-                        name="codeCategory"
-                        required
-                        placeholder="codeCategory"
-                        className="form-control"
-                        value={query.codeCategory}
-                        onChange={handleParam()}
-                    />
-                </div>
-                <div>
-                    <input
-                        type="text"
-                        name="libelle"
-                        required
-                        placeholder="libelle"
-                        className="form-control"
-                        value={query.libelle}
-                        onChange={handleParam()}
-                    />
-                </div>
-                <button type="submit" className={"btn btn-primary"}>Send</button>
-            </form>
+            <Button variant="primary" onClick={open}>
+                Ajouter un article
+            </Button>
+            {
+                showResults ?
+                    <form onSubmit={formSubmit} className={"container col-sm-3"}>
+                        <div>
+                            <input
+                                type="text"
+                                name="codeArticle"
+                                required
+                                placeholder="codeArticle"
+                                className="form-control"
+                                value={query.codeArticle}
+                                onChange={handleParam()}
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                name="codeCategory"
+                                required
+                                placeholder="codeCategory"
+                                className="form-control"
+                                value={query.codeCategory}
+                                onChange={handleParam()}
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                name="libelle"
+                                required
+                                placeholder="libelle"
+                                className="form-control"
+                                value={query.libelle}
+                                onChange={handleParam()}
+                            />
+                        </div>
+                        <div>
+                            <button type="submit" className={"btn btn-primary"}>Ajouter</button>
+                            <button className={"btn btn-danger"} onClick={close}>Fermer</button>
+                        </div>
+                    </form>
+                    : null
+            }
         </>
     )
 }
