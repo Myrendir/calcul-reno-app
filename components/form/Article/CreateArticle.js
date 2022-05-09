@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Button} from "react-bootstrap";
-import * as constant from "../../utils/constants";
+import * as constant from "../../../utils/constants";
 
 export default function CreateArticle() {
     const [query, setQuery] = useState({
