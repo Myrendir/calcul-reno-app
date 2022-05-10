@@ -28,6 +28,7 @@ export default function Biglist(props) {
     return (
         <div style={{height: 600, width: '80%', margin: '0 auto'}}>
             <DataGrid
+                getRowId={(finalRows) => props.id ? finalRows.id : finalRows.id_article}
                 columns={columns}
                 rows={finalRows}
                 rowsPerPageOptions={[5]}
