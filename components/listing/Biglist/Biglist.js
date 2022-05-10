@@ -1,5 +1,7 @@
 import {DataGrid} from '@mui/x-data-grid';
-
+import CircularProgress from '@mui/material/CircularProgress';
+import LinearProgress from '@mui/material/LinearProgress';
+import Box from "@mui/material/Box";
 
 export default function Biglist(props) {
 
@@ -7,7 +9,7 @@ export default function Biglist(props) {
     const rows = [];
     let keys = [];
     if (!props.data.loading) {
-        for (const [key] of Object.entries(props.data.data[1])) {
+        for (const [key] of Object.entries(props.data.data[0])) {
             keys.push(key);
         }
 
@@ -26,15 +28,27 @@ export default function Biglist(props) {
     }
     const finalRows = Array.from(new Set(rows.map(JSON.stringify))).map(JSON.parse);
     return (
-        <div style={{height: 600, width: '80%', margin: '0 auto'}}>
-            <DataGrid
-                getRowId={(finalRows) => props.id ? finalRows.id : finalRows.id_article}
-                columns={columns}
-                rows={finalRows}
-                rowsPerPageOptions={[5]}
-                pageSize={10}
-                checkboxSelection
-            />
+        <div>
+            {
+                props.data.loading ?
+                    <div>
+                        <Box sx={{width: '100%'}}>
+                            <LinearProgress/>
+                        </Box>
+                    </div>
+                    :
+                    <div style={{height: 900, width: '80%', margin: '0 auto'}}>
+                        <DataGrid
+                            getRowId={(finalRows) => props.id ? finalRows.id : finalRows.id_article}
+                            columns={columns}
+                            rows={finalRows}
+                            rowsPerPageOptions={[5]}
+                            pageSize={20}
+                            checkboxSelection
+
+                        />
+                    </div>
+            }
         </div>
     )
 }
