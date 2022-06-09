@@ -1,5 +1,4 @@
 import {DataGrid} from '@mui/x-data-grid';
-import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress from '@mui/material/LinearProgress';
 import Box from "@mui/material/Box";
 
