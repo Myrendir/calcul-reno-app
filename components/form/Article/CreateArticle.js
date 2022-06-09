@@ -1,25 +1,23 @@
 import {useState} from "react";
 import hydrateFormData from "../../../services/handle";
+import validateArticle from "../../../services/validateArticle";
 import {Button, Dialog, DialogContent, DialogTitle} from "@mui/material";
 
+
 const URL = process.env.URL_JAD_API + 'articles';
+
 export default function CreateArticle() {
     const [query, setQuery] = useState({
         "codeArticle": "",
         "codeCategory": "",
         "codeOperation": "",
-        "articles": [
-            {
-                "codeArticle": "",
-                "quantite": 1
-            }
-        ]
+        "articles": [],
+
     });
 
     const [open, setOpen] = useState(false);
 
     const handleDialog = () => {
-        console.log(open, !open)
         setOpen(!open);
     }
 
@@ -63,7 +61,7 @@ export default function CreateArticle() {
         ));
     }
 
-
+    console.log(validateArticle(query))
     return (
         <div>
             <Button onClick={handleDialog}>
@@ -75,25 +73,35 @@ export default function CreateArticle() {
                 <form onSubmit={handleSubmit}>
                     <div>
                         <DialogContent>
-                            <input/>
+                            <input
+                                type="text"
+                                name="codeArticle"
+                                value={query.codeArticle}
+                                onChange={handleChange}
+                                placeholder="Code article"
+                            />
                         </DialogContent>
                     </div>
                     <div>
                         <DialogContent>
-                            <input/>
+                            <input
+                                type="text"
+                                name="codeCategory"
+                                value={query.codeCategory}
+                                onChange={handleChange}
+                                placeholder="Code category"
+                            />
                         </DialogContent>
                     </div>
                     <div>
                         <DialogContent>
-                            <input/>
-                        </DialogContent>
-                    </div>
-                    <div>
-                        <DialogContent>
-                            <input/>
-                        </DialogContent>
-                        <DialogContent>
-                            <input/>
+                            <input
+                                type="text"
+                                name="codeOperation"
+                                value={query.codeOperation}
+                                onChange={handleChange}
+                                placeholder="Code operation"
+                            />
                         </DialogContent>
                     </div>
                     <Button type="submit">Ajouter</Button>
