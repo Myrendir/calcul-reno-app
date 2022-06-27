@@ -1,7 +1,5 @@
+//{codeArticle}-{codeCategory}-{codeOperation}:({codeArticle}*{quantite}}),({codeArticle}*quantite}});
 const parse = (str) => {
-
-    //{codeArticle}-{codeCategory}-{codeOperation}:({codeArticle}*{quantite}}),({codeArticle}*quantite}});
-
     const result = [];
 
     const finalString = cleanString(str);
@@ -45,17 +43,19 @@ const getArticles = (str) => {
 
     articles.push({
         codeArticle: getStringBs(str.match(parenthRegex)[1], '*'),
-        quantite: getStringAs(str.match(parenthRegex)[1], '*'),
+        quantite: parseInt(getStringAs(str.match(parenthRegex)[1], '*')),
     });
+
     str = setNotTraitedStr(str, ':');
 
     for (let i = 0; i < iterations; i++) {
         str = setNotTraitedStr(str, ',');
         articles.push({
             codeArticle: getStringBs(str.match(parenthRegex)[1], '*'),
-            quantite: getStringAs(str.match(parenthRegex)[1], '*'),
+            quantite: parseInt(getStringAs(str.match(parenthRegex)[1], '*')),
         });
     }
+
     return articles;
 }
 const cleanString = (str) => {
@@ -75,16 +75,19 @@ const setQueryObject = (str) => {
         codeOperation: '',
         articles: []
     }
+
     response.codeArticle = getStringBs(str, '-');
     str = setNotTraitedStr(str, '-');
+
     response.codeCategorie = getStringBs(str, '-');
     str = setNotTraitedStr(str, '-');
+
     response.codeOperation = getStringBs(str, ':');
     str = setNotTraitedStr(str, ':');
+
     response.articles = getArticles(str);
 
     return response;
-
 }
 
-export default parse;
+module.exports = parse;
