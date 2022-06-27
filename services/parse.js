@@ -29,6 +29,7 @@ const splitStrings = (str, separator) => {
 const getStringBs = (str, separator) => {
     return str.substring(0, str.indexOf(separator));
 }
+
 const getStringAs = (str, separator) => {
     return str.substring(str.indexOf(separator) + 1);
 }
@@ -40,20 +41,20 @@ const setNotTraitedStr = (str, separator) => {
 const getArticles = (str) => {
     const parenthRegex = /\(([^)]+)\)/;
     const articles = [];
-    const iterations = str.split(',').length
+    const iterations = str.split(',').length - 1
+
+    articles.push({
+        codeArticle: getStringBs(str.match(parenthRegex)[1], '*'),
+        quantite: getStringAs(str.match(parenthRegex)[1], '*'),
+    });
+    str = setNotTraitedStr(str, ':');
+
     for (let i = 0; i < iterations; i++) {
-        if (i === 0) {
-            articles.push({
-                codeArticle: getStringBs(str.match(parenthRegex)[1], '*'),
-                quantite: getStringAs(str.match(parenthRegex)[1], '*'),
-            });
-        } else {
-            articles.push({
-                codeArticle: getStringBs(str.match(parenthRegex)[1], '*'),
-                quantite: getStringAs(str.match(parenthRegex)[1], '*'),
-            });
-            str = str.slice(str.indexOf(',') + 1);
-        }
+        str = setNotTraitedStr(str, ',');
+        articles.push({
+            codeArticle: getStringBs(str.match(parenthRegex)[1], '*'),
+            quantite: getStringAs(str.match(parenthRegex)[1], '*'),
+        });
     }
     return articles;
 }
