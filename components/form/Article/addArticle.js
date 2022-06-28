@@ -10,19 +10,21 @@ export default function AddArticle() {
     const [query, setQuery] = useState('');
 
     const onSubmit = () => {
-        addArticle(URL, parse(query)).then(r => {
+        addArticle(URL, parse(query, true)).then(r => {
             setQuery('');
+            console.log(r)
         })
     }
 
     return (
         <>
             <div className="row">
-                <h3>Ajout d'articles</h3> <br/>
+                <h3>Ajout d'une ou plusieurs recettes</h3> <br/>
                 <p>Il faut rédiger la commande comme
                     suit : <b>codeArticle-codeCategorie-codeOperation:(codeArticle*quantite),(codeArticle*quantite);</b>
                 </p> <br/>
-                <p>Il est nécesaire de séparer chaque article par une <b>virgule ","</b> et de les saisir à l'intérieur de <b>parenthèses</b>.</p><br/>
+                <p>Il est nécesaire de séparer chaque article par une <b>virgule ","</b> et de les saisir à l'intérieur
+                    de <b>parenthèses</b>.</p><br/>
                 <p>Il est possible de rédiger autant de commande que nécessaire mais il est impératif de les séparer
                     avec un <b>point virgule ";"</b>.</p>
             </div>
@@ -33,6 +35,7 @@ export default function AddArticle() {
                     className={'form-control'}
                     value={query}
                     name={'query'}
+                    placeholder={'codeArticle-codeCategorie-codeOperation:(codeArticle*quantite),(codeArticle*quantite);'}
                     onChange={e => setQuery(e.target.value)}
                 />
                 </div>

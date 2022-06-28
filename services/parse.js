@@ -1,16 +1,25 @@
-//{codeArticle}-{codeCategory}-{codeOperation}:({codeArticle}*{quantite}}),({codeArticle}*quantite}});
-const parse = (str) => {
-    const result = [];
+//{codeArticle}-{codeCategorie}-{codeOperation}:({codeArticle}*{quantite}}),({codeArticle}*quantite}});
+const parse = (data, string) => {
+    let result = string ? [] : '';
+    if (string) {
+        const finalString = cleanString(data);
+        const strings = splitStrings(finalString, ';');
 
-    const finalString = cleanString(str);
-    const strings = splitStrings(finalString, ';');
+        strings.map(r => {
+            result.push(setQueryObject(r));
+        });
 
-    strings.map(r => {
-        result.push(setQueryObject(r));
-    });
+        return result;
+    } else {
+        const infos = data.codeArticle + "-" + data.codeCategorie + "-" + data.codeOperation + ":";
+        let articles = '';
+        data.articles.map(r => {
+            articles += '(' + r.codeArticle + '*' + r.quantite + '),';
+        })
 
-    return result;
-
+        result = infos + articles
+        return result;
+    }
 }
 
 const splitStrings = (str, separator) => {
