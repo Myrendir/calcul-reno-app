@@ -2,6 +2,7 @@
 const parse = (data, string) => {
     let result = string ? [] : '';
     if (string) {
+        // String to Json
         const finalString = cleanString(data);
         const strings = splitStrings(finalString, ';');
 
@@ -11,14 +12,16 @@ const parse = (data, string) => {
 
         return result;
     } else {
+        // Json to String
         const infos = data.codeArticle + "-" + data.codeCategorie + "-" + data.codeOperation + ":";
         let articles = '';
         data.articles.map(r => {
             articles += '(' + r.codeArticle + '*' + r.quantite + '),';
         })
 
-        result = infos + articles
-        return result;
+        result = infos + articles;
+        result = result.substring(0, result.length - 1);
+        return cleanString(result);
     }
 }
 

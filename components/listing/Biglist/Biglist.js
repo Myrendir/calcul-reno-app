@@ -1,8 +1,9 @@
 import {DataGrid} from '@mui/x-data-grid';
 import LinearProgress from '@mui/material/LinearProgress';
 import Box from "@mui/material/Box";
+import parse from "../../../services/parse";
 
-export default function Biglist(props) {
+export default function Biglist(props, command) {
 
     const columns = [];
     const rows = [];
@@ -26,6 +27,39 @@ export default function Biglist(props) {
         })
     }
     const finalRows = Array.from(new Set(rows.map(JSON.stringify))).map(JSON.parse);
+    const test =
+        [
+            {
+                "codeArticle": "A003",
+                "codeCategorie": "C084",
+                "codeOperation": "O05",
+                "articles": [
+                    {
+                        "codeArticle": "P279729033",
+                        "quantite": 4
+                    }
+                ]
+            },
+            {
+                "codeArticle": "A001",
+                "codeCategorie": "C084",
+                "codeOperation": "O02",
+                "articles": [
+                    {
+                        "codeArticle": "A003",
+                        "quantite": 2
+                    },
+                    {
+                        "codeArticle": "P815021753",
+                        "quantite": 3
+                    }
+                ]
+            }
+        ];
+    for (let i = 0; i < test.length; i++) {
+        console.log(parse(test[i], false))
+    }
+
     return (
         <div>
             {
