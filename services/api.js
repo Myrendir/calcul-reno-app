@@ -3,7 +3,7 @@ import axios from "axios";
 
 const apiUrl = process.env.URL_JAD_API;
 
-const GetAll = (path) => {
+export const GetAll = (path) => {
     const [data, setData] = useState([])
 
     const [loading, setLoading] = useState(true);
@@ -29,4 +29,6 @@ const GetAll = (path) => {
     }
 }
 
-export default GetAll;
+export const addArticle = (path, data) => {
+    return axios.post(path, data);
+}

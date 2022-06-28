@@ -1,6 +1,6 @@
 const parse = require('../services/parse');
 
-describe('Parse to JSON the written string in textarea', ()=>{
+describe('Parse to JSON the written string in textarea', () => {
     test('parse should be OK', () => {
         const string = "codeArticle1-codeCategory1-codeOperation1:(codeArticle2*4),(codeArticle3*7),(codeArticle8*25);";
         const toJson = parse(string);

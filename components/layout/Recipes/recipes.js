@@ -1,4 +1,4 @@
-import GetAll from "../../../services/api";
+import {GetAll} from "../../../services/api";
 import Biglist from "../../listing/Biglist/Biglist";
 
 export default function Recipes() {
