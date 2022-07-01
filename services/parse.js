@@ -39,7 +39,7 @@ const splitStrings = (str, separator) => {
 const getStringBs = (str, separator) => {
     if (str.substring(0, str.indexOf(separator)) === '') {
         return {
-            error: "le format n'est pas respecté."
+            error: "Le format n'est pas respecté"
         }
     }
     return str.substring(0, str.indexOf(separator));
@@ -48,7 +48,7 @@ const getStringBs = (str, separator) => {
 const getStringAs = (str, separator) => {
     if (str.substring(0, str.indexOf(separator)) === '') {
         return {
-            error: "le format n'est pas respecté."
+            error: "Le format n'est pas respecté"
         }
     }
     return str.substring(str.indexOf(separator) + 1);
@@ -98,6 +98,7 @@ const setQueryObject = (str) => {
         "articles": []
     }
     response.codeArticle = getStringBs(str, '-');
+
     str = setNotTraitedStr(str, '-');
 
     response.codeCategorie = getStringBs(str, '-');

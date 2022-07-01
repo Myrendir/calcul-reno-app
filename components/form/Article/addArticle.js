@@ -21,18 +21,34 @@ export default function AddArticle() {
     const onSubmit = async (e) => {
         e.preventDefault();
         const data = parse(query, true)
-        addArticle(URL, data)
-            .then(r => {
-                console.log(r);
-                setInfos(data[0].codeArticle)
-                setSucess(true)
+        if (data.error.length > 0) {
+            setError(true);
+            setErrorMessage("Un problème est survenu : le format n'est pas respecté.")
+        } else {
+            addArticle(URL, data)
+                .then(r => {
+                    console.log(r)
+                    if (data.length > 1) {
+                        let noms = ' Articles ';
+                        data.map(d => {
+                                noms += d.codeArticle + " & "
+                            }
+                        )
+                        noms = noms.substring(0, noms.length - 2);
+                        setInfos(noms + "créés ")
+                    } else {
+                        setInfos("Article " + data[0].codeArticle + " créé ");
+                    }
 
-            })
-            .catch(err => {
-                setError(true);
-                setErrorMessage("Un problème est survenu : le format n'est pas respecté.")
-                console.log(err);
-            });
+                    setSucess(true)
+
+                })
+                .catch(err => {
+                    setError(true);
+                    setErrorMessage("Un problème est survenu")
+                    console.log(err);
+                });
+        }
     }
 
     return (
@@ -40,7 +56,7 @@ export default function AddArticle() {
             {
                 sucess ?
                     <Alert severity="success">
-                        Article <b>{infos}</b> créé avec succès.
+                        <b>{infos} avec succès.</b>
                     </Alert>
                     : null
             }
@@ -62,14 +78,17 @@ export default function AddArticle() {
                                     suit
                                     : <b>codeArticle-codeCategorie-codeOperation:(codeArticle*quantite),(codeArticle*quantite);</b>
                                 </p> <br/>
-                                <p>Il est nécesaire de séparer chaque article par une <b>virgule ","</b> et de les
+                                <p>Il faut renseigner le <b>codeArticle</b> puis récupérer le code des différentes
+                                    ressources dans le listing correspondant (cf menu de gauche).</p><br/>
+                                <p>Il est nécesaire de séparer chaque composant (<b>min = 1 et max = 2</b>) par une <b>virgule
+                                    ","</b> et de les
                                     saisir à
                                     l'intérieur
                                     de <b>parenthèses</b>.</p><br/>
                                 <p>Il est possible de rédiger autant de commande que nécessaire mais il est impératif de
                                     les
                                     séparer
-                                    avec un <b>point virgule ";"</b>.</p>
+                                    avec un <b>point virgule ";"</b></p>
                             </div>
 
                             <form onSubmit={onSubmit}>
