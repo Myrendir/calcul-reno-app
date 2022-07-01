@@ -21,34 +21,31 @@ export default function AddArticle() {
     const onSubmit = async (e) => {
         e.preventDefault();
         const data = parse(query, true)
-        if (data.error.length > 0) {
-            setError(true);
-            setErrorMessage("Un problème est survenu : le format n'est pas respecté.")
-        } else {
-            addArticle(URL, data)
-                .then(r => {
-                    console.log(r)
-                    if (data.length > 1) {
-                        let noms = ' Articles ';
-                        data.map(d => {
-                                noms += d.codeArticle + " & "
-                            }
-                        )
-                        noms = noms.substring(0, noms.length - 2);
-                        setInfos(noms + "créés ")
-                    } else {
-                        setInfos("Article " + data[0].codeArticle + " créé ");
-                    }
+        addArticle(URL, data)
+            .then(r => {
+                console.log(r)
+                if (data.length > 1) {
+                    let noms = ' Articles ';
+                    data.map(d => {
+                            noms += d.codeArticle + " & "
+                        }
+                    )
+                    noms = noms.substring(0, noms.length - 2);
+                    setInfos(noms + "créés ")
+                } else {
+                    setInfos("Article " + data[0].codeArticle + " créé ");
+                }
 
-                    setSucess(true)
+                setSucess(true)
 
-                })
-                .catch(err => {
-                    setError(true);
-                    setErrorMessage("Un problème est survenu")
-                    console.log(err);
-                });
-        }
+            })
+            .catch(err => {
+                setError(true);
+                setErrorMessage("Un problème est survenu")
+                console.log(err);
+            });
+
+
     }
 
     return (
