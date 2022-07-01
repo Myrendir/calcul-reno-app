@@ -8,7 +8,7 @@ export default function Articles() {
     const data = GetAll('articles');
     return (
         <>
-            <AddArticle />
+            {/*<AddArticle />*/}
             <Biglist data={data} id={true}/>
         </>
     )

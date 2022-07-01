@@ -37,10 +37,20 @@ const splitStrings = (str, separator) => {
 }
 
 const getStringBs = (str, separator) => {
+    if (str.substring(0, str.indexOf(separator)) === '') {
+        return {
+            error: "le format n'est pas respecté."
+        }
+    }
     return str.substring(0, str.indexOf(separator));
 }
 
 const getStringAs = (str, separator) => {
+    if (str.substring(0, str.indexOf(separator)) === '') {
+        return {
+            error: "le format n'est pas respecté."
+        }
+    }
     return str.substring(str.indexOf(separator) + 1);
 }
 
@@ -54,8 +64,8 @@ const getArticles = (str) => {
     const iterations = str.split(',').length - 1
 
     articles.push({
-        codeArticle: getStringBs(str.match(parenthRegex)[1], '*'),
-        quantite: parseInt(getStringAs(str.match(parenthRegex)[1], '*')),
+        "codeArticle": getStringBs(str.match(parenthRegex)[1], '*'),
+        "quantite": parseInt(getStringAs(str.match(parenthRegex)[1], '*')),
     });
 
     str = setNotTraitedStr(str, ':');
@@ -63,8 +73,8 @@ const getArticles = (str) => {
     for (let i = 0; i < iterations; i++) {
         str = setNotTraitedStr(str, ',');
         articles.push({
-            codeArticle: getStringBs(str.match(parenthRegex)[1], '*'),
-            quantite: parseInt(getStringAs(str.match(parenthRegex)[1], '*')),
+            "codeArticle": getStringBs(str.match(parenthRegex)[1], '*'),
+            "quantite": parseInt(getStringAs(str.match(parenthRegex)[1], '*')),
         });
     }
 
@@ -82,12 +92,11 @@ const cleanString = (str) => {
 
 const setQueryObject = (str) => {
     const response = {
-        codeArticle: '',
-        codeCategorie: '',
-        codeOperation: '',
-        articles: []
+        "codeArticle": "",
+        "codeCategorie": "",
+        "codeOperation": "",
+        "articles": []
     }
-
     response.codeArticle = getStringBs(str, '-');
     str = setNotTraitedStr(str, '-');
 

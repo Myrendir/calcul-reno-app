@@ -6,21 +6,21 @@ describe('Parse to JSON the written string in textarea', () => {
         const toJson = parse(string);
         const attempted = [
             {
-                codeArticle: 'codeArticle1',
-                codeCategorie: 'codeCategory1',
-                codeOperation: 'codeOperation1',
-                articles: [
+                "codeArticle": "codeArticle1",
+                "codeCategorie": "codeCategory1",
+                "codeOperation": "codeOperation1",
+                "articles": [
                     {
-                        codeArticle: 'codeArticle2',
-                        quantite: 4
+                        "codeArticle": "codeArticle2",
+                        "quantite": 4
                     },
                     {
-                        codeArticle: 'codeArticle3',
-                        quantite: 7
+                        "codeArticle": "codeArticle3",
+                        "quantite": 7
                     },
                     {
-                        codeArticle: 'codeArticle8',
-                        quantite: 25
+                        "codeArticle": "codeArticle8",
+                        "quantite": 25
                     }
                 ]
             }
